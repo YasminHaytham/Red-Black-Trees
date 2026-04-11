@@ -111,4 +111,43 @@ class RedBlackTree:
         x.right = y
         y.parent = x
 
+    def SearchWord(self, value):
+        current = self.root
+        while current != self.NIL:
+            if value == current.value:
+                return True
+            elif value < current.value:
+                current = current.left
+            else:
+                current = current.right
+        return False
     
+
+    def TreeHight(self, node):
+        if node == self.NIL:
+            return 0
+        else:
+            left_height = self.TreeHight(node.left)
+            right_height = self.TreeHight(node.right)
+            return max(left_height, right_height) + 1
+        
+
+    def BlackHeight(self, node):
+        if node == self.NIL:
+            return 1
+        else:
+            left_black_height = self.BlackHeight(node.left)
+            right_black_height = self.BlackHeight(node.right)
+            if node.color == "BLACK":
+                return max(left_black_height, right_black_height) + 1
+            else:
+                return max(left_black_height, right_black_height)
+            
+    
+    def TreeSize(self, node):
+        if node == self.NIL:
+            return 0
+        else:
+            left_size = self.TreeSize(node.left)
+            right_size = self.TreeSize(node.right)
+            return left_size + right_size + 1
